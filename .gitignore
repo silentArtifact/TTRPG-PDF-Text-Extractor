@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.env
+
+# Logs
+logs/*
+!logs/extraction.log
+
+# Input PDFs
+input/pdfs/*
+!input/pdfs/.gitkeep
+
+# Output directories
+output/raw/*
+!output/raw/.gitkeep
+output/processed/*
+!output/processed/.gitkeep
+output/markdown/*
+!output/markdown/.gitkeep
+
+# MacOS
+.DS_Store
