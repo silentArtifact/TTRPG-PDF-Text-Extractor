@@ -1,11 +1,11 @@
-"""Tests for :mod:`src.extractor`."""
+"""Tests for :mod:`fabula_extractor.extractor`."""
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
-from src.extractor import FabulaExtractor
+from fabula_extractor.extractor import FabulaExtractor
 
 
 def _root_config() -> Path:
