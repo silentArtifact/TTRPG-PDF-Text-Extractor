@@ -1,0 +1,16 @@
+extraction:
+  min_text_length: 10
+  page_separator: "\n\n=== PAGE {} ===\n\n"
+
+markdown:
+  chapter_patterns:
+    - "^CHAPTER\s+\d+"
+    - "^Chapter\s+\d+"
+  section_patterns:
+    - "^[A-Z][A-Z\s]+$"
+
+output:
+  create_index: true
+
+logging:
+  level: INFO
