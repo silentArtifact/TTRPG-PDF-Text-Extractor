@@ -52,7 +52,7 @@ class FabulaExtractor:
             return None
 
         file_hash = get_file_hash(pdf_path)
-        cache_path = Path(f"output/raw/{file_hash}.json")
+        cache_path = Path("output") / "raw" / f"{file_hash}.json"
 
         if cache_path.exists():
             logger.info("Using cached extraction")
@@ -63,7 +63,7 @@ class FabulaExtractor:
             save_cache(cache_path, result)
 
             markdown = self.converter.convert(result)
-            output_path = Path(f"output/markdown/{pdf_path.stem}.md")
+            output_path = Path("output") / "markdown" / f"{pdf_path.stem}.md"
             output_path.parent.mkdir(parents=True, exist_ok=True)
             output_path.write_text(markdown, encoding="utf-8")
 
@@ -73,7 +73,7 @@ class FabulaExtractor:
             logger.exception(f"Failed to process {pdf_path}: {exc}")
             return None
 
-    def extract_all(self, pdf_dir: Path = Path("input/pdfs")) -> Dict:
+    def extract_all(self, pdf_dir: Path = Path("input") / "pdfs") -> Dict:
         """Extract all PDF files in ``pdf_dir``."""
         pdf_files = list(pdf_dir.glob("*.pdf"))
         if not pdf_files:
@@ -100,16 +100,15 @@ class FabulaExtractor:
     # ------------------------------------------------------------------
     def _create_index(self, results: Dict) -> None:
         """Create an index markdown file summarising results."""
-        index_path = Path("output/markdown/INDEX.md")
+        index_path = Path("output") / "markdown" / "INDEX.md"
         lines = ["# Fabula Ultima Content Index\n\n"]
         for filename, data in results.items():
             lines.append(f"## {filename}\n")
             lines.append(f"- Pages: {data.get('total_pages', 0)}\n")
             lines.append(f"- Text blocks: {data.get('text_blocks', 0)}\n")
             lines.append(f"- Tables: {data.get('tables', 0)}\n")
-            lines.append(
-                f"- File: [{filename}](./{Path(filename).stem}.md)\n\n"
-            )
+            link_path = Path(".") / f"{Path(filename).stem}.md"
+            lines.append(f"- File: [{filename}]({link_path})\n\n")
 
         index_path.parent.mkdir(parents=True, exist_ok=True)
         index_path.write_text("".join(lines), encoding="utf-8")
