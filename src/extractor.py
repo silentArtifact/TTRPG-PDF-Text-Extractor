@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Dict, Optional
 
@@ -14,7 +13,13 @@ from tqdm import tqdm
 
 from .markdown_converter import MarkdownConverter
 from .processor import PDFProcessor
-from .utils import get_file_hash, setup_logging, validate_pdf
+from .utils import (
+    get_file_hash,
+    load_cache,
+    save_cache,
+    setup_logging,
+    validate_pdf,
+)
 
 
 class FabulaExtractor:
@@ -34,16 +39,6 @@ class FabulaExtractor:
         with open(config_path, "r", encoding="utf-8") as fh:
             return yaml.safe_load(fh)
 
-    def _save_cache(self, cache_path: Path, data: Dict) -> None:
-        """Write raw extraction data to a JSON cache file."""
-        cache_path.parent.mkdir(parents=True, exist_ok=True)
-        with cache_path.open("w", encoding="utf-8") as fh:
-            json.dump(data, fh)
-
-    def _load_cache(self, cache_path: Path) -> Dict:
-        """Load previously cached extraction data."""
-        with cache_path.open("r", encoding="utf-8") as fh:
-            return json.load(fh)
 
     # ------------------------------------------------------------------
     # Extraction methods
@@ -61,11 +56,11 @@ class FabulaExtractor:
 
         if cache_path.exists():
             logger.info("Using cached extraction")
-            return self._load_cache(cache_path)
+            return load_cache(cache_path)
 
         try:
             result = self.processor.process_pdf(pdf_path)
-            self._save_cache(cache_path, result)
+            save_cache(cache_path, result)
 
             markdown = self.converter.convert(result)
             output_path = Path(f"output/markdown/{pdf_path.stem}.md")
