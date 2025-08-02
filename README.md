@@ -1,0 +1,1 @@
+# TTRPG-PDF-Text-Extractor
