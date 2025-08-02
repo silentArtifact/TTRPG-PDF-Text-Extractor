@@ -68,7 +68,7 @@ def test_extract_all_creates_index(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
 
     fixture = Path(__file__).parent / "fixtures" / "sample.pdf"
-    pdf_dir = Path("input/pdfs")
+    pdf_dir = Path("input") / "pdfs"
     pdf_dir.mkdir(parents=True)
     for name in ("a.pdf", "b.pdf"):
         (pdf_dir / name).write_bytes(fixture.read_bytes())
@@ -81,7 +81,7 @@ def test_extract_all_creates_index(tmp_path, monkeypatch):
     extractor.processor.process_pdf = fake_process
     extractor.extract_all(pdf_dir)
 
-    index_path = Path("output/markdown/INDEX.md")
+    index_path = Path("output") / "markdown" / "INDEX.md"
     assert index_path.exists()
     content = index_path.read_text()
     assert "a.pdf" in content and "b.pdf" in content
