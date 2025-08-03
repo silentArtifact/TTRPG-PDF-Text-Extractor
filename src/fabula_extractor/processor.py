@@ -12,6 +12,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, List
 
+from loguru import logger
 import fitz  # type: ignore
 import pdfplumber
 
@@ -84,10 +85,10 @@ class PDFProcessor:
                     result["tables"] += len(tables)
 
                     result["pages"].append(page_info)
-        except Exception:
+        except Exception as exc:
             # In case of an invalid PDF or parsing error we simply return
             # whatever has been collected so far.  The calling code can
             # handle empty results and still cache the placeholder data.
-            pass
+            logger.exception(f"Error processing PDF {pdf_path}: {exc}")
 
         return result
