@@ -9,6 +9,7 @@ This tool extracts text from illustrated TTRPG rulebooks (specifically Fabula Ul
 ## System Requirements
 
 - macOS 10.15+
+- Windows 10/11 (tested)
 - Python 3.9+
 - 16GB RAM recommended for processing large PDFs
 - ~2GB free disk space for processing
@@ -22,7 +23,8 @@ cd fabula-extractor
 
 # Create virtual environment
 python3 -m venv venv
-source venv/bin/activate
+source venv/bin/activate      # macOS/Linux
+venv\Scripts\activate        # Windows
 
 # Install dependencies
 pip install -r requirements.txt
@@ -59,10 +61,11 @@ fabula-extractor/
 
 ```bash
 # Place PDFs in input/pdfs/
-cp ~/Downloads/*.pdf input/pdfs/
+cp ~/Downloads/*.pdf input/pdfs/                    # macOS/Linux
+copy %USERPROFILE%\Downloads\*.pdf input\pdfs\      # Windows
 
 # Run extraction
-python -m src.extractor
+python -m fabula_extractor.extractor  # or use the console script: fabula-extractor
 
 # Find results in output/markdown/
 ls output/markdown/
