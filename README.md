@@ -75,7 +75,7 @@ ls output/markdown/
 
 ### requirements.txt
 ```
-PyMuPDF==1.23.8
+PyMuPDF>=1.26.3
 pdfplumber==0.10.3
 pypdf==3.17.1
 pyyaml==6.0.1
