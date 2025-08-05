@@ -2,17 +2,29 @@
 
 from pathlib import Path
 import sys
+import subprocess
 
-# Default to running the ``install`` command when no arguments are supplied so
-# that ``python setup.py`` installs the project and its requirements.
+# When executed without arguments, install the package using pip.
+# This avoids deprecated ``setup.py install`` and handles user-site installs
+# automatically when not running inside a virtual environment.
 if len(sys.argv) == 1:
-    sys.argv.append("install")
+    try:
+        import ensurepip
+        ensurepip.bootstrap()
+    except Exception:
+        pass
+
+    in_venv = sys.prefix != getattr(sys, "base_prefix", sys.prefix)
+    cmd = [sys.executable, "-m", "pip", "install", "."]
+    if not in_venv:
+        cmd.insert(4, "--user")
+    subprocess.check_call(cmd)
+    raise SystemExit
 
 try:
     from setuptools import find_packages, setup
 except ModuleNotFoundError:
     import ensurepip
-    import subprocess
 
     ensurepip.bootstrap()
     subprocess.check_call([
