@@ -27,13 +27,20 @@ def setup_logging(config: Optional[dict] = None) -> None:
 
 
 def validate_pdf(path: Path) -> bool:
-    """Check that ``path`` is an existing, readable PDF file."""
+    """Check that ``path`` is an existing, readable PDF file.
+
+    Validates that the file exists, has a ``.pdf`` extension, is readable,
+    and begins with the standard ``%PDF`` header.
+    """
     pdf_path = Path(path)
     if not pdf_path.exists() or pdf_path.suffix.lower() != ".pdf":
         return False
     try:
-        with pdf_path.open("rb"):
-            return True
+        with pdf_path.open("rb") as fh:
+            header = fh.read(4)
+            if not header.startswith(b"%PDF"):
+                return False
+        return True
     except OSError:
         return False
 
