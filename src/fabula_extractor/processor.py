@@ -13,7 +13,15 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 from loguru import logger
-import fitz  # type: ignore
+
+try:
+    import fitz  # type: ignore
+except ModuleNotFoundError:
+    try:
+        import pymupdf as fitz  # type: ignore
+    except ModuleNotFoundError as exc:
+        raise ImportError("PyMuPDF is required; install with 'pip install pymupdf'") from exc
+
 import pdfplumber
 
 

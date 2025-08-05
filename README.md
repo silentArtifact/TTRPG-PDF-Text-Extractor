@@ -28,6 +28,10 @@ venv\Scripts\activate        # Windows
 
 # Install dependencies
 pip install -r requirements.txt
+
+# On Windows ensure PyMuPDF is installed:
+python -m pip install --upgrade pip
+pip install pymupdf
 ```
 
 ## Project Structure
