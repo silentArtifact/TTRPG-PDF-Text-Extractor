@@ -2,7 +2,24 @@
 
 from pathlib import Path
 
-from setuptools import find_packages, setup
+try:
+    from setuptools import find_packages, setup
+except ModuleNotFoundError:
+    import ensurepip
+    import subprocess
+    import sys
+
+    ensurepip.bootstrap()
+    subprocess.check_call([
+        sys.executable,
+        "-m",
+        "pip",
+        "install",
+        "--upgrade",
+        "pip",
+        "setuptools",
+    ])
+    from setuptools import find_packages, setup
 
 
 def _read_requirements() -> list[str]:
