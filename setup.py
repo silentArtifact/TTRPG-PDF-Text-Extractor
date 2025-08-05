@@ -1,13 +1,18 @@
 """Package configuration for ``fabula-extractor``."""
 
 from pathlib import Path
+import sys
+
+# Default to running the ``install`` command when no arguments are supplied so
+# that ``python setup.py`` installs the project and its requirements.
+if len(sys.argv) == 1:
+    sys.argv.append("install")
 
 try:
     from setuptools import find_packages, setup
 except ModuleNotFoundError:
     import ensurepip
     import subprocess
-    import sys
 
     ensurepip.bootstrap()
     subprocess.check_call([
