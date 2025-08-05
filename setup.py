@@ -19,6 +19,9 @@ except ModuleNotFoundError:
         "pip",
         "setuptools",
     ])
+    import importlib, site
+    site.main()  # refresh sys.path with user site directories
+    importlib.invalidate_caches()
     from setuptools import find_packages, setup
 
 
