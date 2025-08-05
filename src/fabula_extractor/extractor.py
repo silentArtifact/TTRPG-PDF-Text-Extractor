@@ -36,8 +36,17 @@ class FabulaExtractor:
     # ------------------------------------------------------------------
     def _load_config(self, config_path: str) -> Dict:
         """Load YAML configuration file."""
-        with open(config_path, "r", encoding="utf-8") as fh:
-            return yaml.safe_load(fh)
+        try:
+            with open(config_path, "r", encoding="utf-8") as fh:
+                return yaml.safe_load(fh) or {}
+        except FileNotFoundError:
+            logger.error(f"Config file not found: {config_path}. Using defaults.")
+            return {}
+        except yaml.YAMLError as exc:
+            logger.error(f"Invalid YAML in config file {config_path}: {exc}")
+            raise ValueError(
+                f"Invalid YAML in configuration file: {config_path}"
+            ) from exc
 
 
     # ------------------------------------------------------------------
