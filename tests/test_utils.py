@@ -1,11 +1,11 @@
-"""Tests for :mod:`fabula_extractor.utils`."""
+"""Tests for :mod:`pdf_extractor.utils`."""
 
 from __future__ import annotations
 
 import hashlib
 from pathlib import Path
 
-from fabula_extractor.utils import (
+from pdf_extractor.utils import (
     get_file_hash,
     load_cache,
     save_cache,

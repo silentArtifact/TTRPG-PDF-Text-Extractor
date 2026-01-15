@@ -1,4 +1,4 @@
-"""Package configuration for ``fabula-extractor``."""
+"""Package configuration for ``pdf-extractor``."""
 
 from pathlib import Path
 import sys
@@ -54,16 +54,16 @@ def _read_requirements() -> list[str]:
 
 
 setup(
-    name="fabula-extractor",
-    version="0.1.0",
-    description="Extract text and tables from Fabula Ultima PDFs.",
-    author="Fabula Community",
+    name="pdf-extractor",
+    version="0.2.0",
+    description="Extract text and tables from PDF documents.",
+    author="PDF Extractor Contributors",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     install_requires=_read_requirements(),
     entry_points={
         "console_scripts": [
-            "fabula-extractor=fabula_extractor.extractor:main",
+            "pdf-extractor=pdf_extractor.extractor:main",
         ]
     },
 )

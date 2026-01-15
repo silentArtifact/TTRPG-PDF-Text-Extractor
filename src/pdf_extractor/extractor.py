@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Main extraction orchestrator for Fabula Ultima PDFs."""
+"""Main extraction orchestrator for PDF documents."""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ from .utils import (
 )
 
 
-class FabulaExtractor:
+class PDFExtractor:
     """Coordinate PDF processing and markdown conversion."""
 
     def __init__(self, config_path: str = "config.yaml") -> None:
@@ -110,7 +110,7 @@ class FabulaExtractor:
     def _create_index(self, results: Dict) -> None:
         """Create an index markdown file summarising results."""
         index_path = Path("output") / "markdown" / "INDEX.md"
-        lines = ["# Fabula Ultima Content Index\n\n"]
+        lines = ["# PDF Content Index\n\n"]
         for filename, data in results.items():
             lines.append(f"## {filename}\n")
             lines.append(f"- Pages: {data.get('total_pages', 0)}\n")
@@ -134,8 +134,8 @@ class FabulaExtractor:
 )
 @click.option("--config", default="config.yaml", help="Config file path")
 def main(pdf: Optional[str], process_all: bool, config: str) -> None:
-    """Fabula Ultima PDF Text Extractor."""
-    extractor = FabulaExtractor(config)
+    """PDF Text Extractor - Extract text and tables from PDF documents."""
+    extractor = PDFExtractor(config)
 
     if pdf:
         extractor.extract_pdf(Path(pdf))

@@ -1,4 +1,4 @@
-"""Tests for configuration loading in :mod:`fabula_extractor.extractor`."""
+"""Tests for configuration loading in :mod:`pdf_extractor.extractor`."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 from loguru import logger
 
-from fabula_extractor.extractor import FabulaExtractor
+from pdf_extractor.extractor import PDFExtractor
 
 
 def test_missing_config_uses_defaults(tmp_path):
@@ -16,7 +16,7 @@ def test_missing_config_uses_defaults(tmp_path):
     sink = StringIO()
     handler_id = logger.add(sink, level="ERROR")
 
-    extractor = FabulaExtractor(str(missing))
+    extractor = PDFExtractor(str(missing))
 
     try:
         logger.remove(handler_id)
@@ -37,7 +37,7 @@ def test_bad_yaml_raises_value_error(tmp_path):
     handler_id = logger.add(sink, level="ERROR")
 
     with pytest.raises(ValueError):
-        FabulaExtractor(str(bad))
+        PDFExtractor(str(bad))
 
     try:
         logger.remove(handler_id)

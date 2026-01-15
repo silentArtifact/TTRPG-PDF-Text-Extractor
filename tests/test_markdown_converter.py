@@ -1,8 +1,8 @@
-"""Tests for :mod:`fabula_extractor.markdown_converter`."""
+"""Tests for :mod:`pdf_extractor.markdown_converter`."""
 
 from __future__ import annotations
 
-from fabula_extractor.markdown_converter import MarkdownConverter
+from pdf_extractor.markdown_converter import MarkdownConverter
 
 
 # ---------------------------------------------------------------------------
