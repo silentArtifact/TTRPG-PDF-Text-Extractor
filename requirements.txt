@@ -6,3 +6,4 @@ pyyaml==6.0.1
 tqdm==4.66.1
 click==8.1.7
 loguru==0.7.2
+questionary==2.0.1
