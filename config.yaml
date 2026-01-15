@@ -3,6 +3,14 @@ extraction:
   min_text_length: 10
   page_separator: "\n\n=== PAGE {} ===\n\n"
 
+  # Reading order settings
+  sort_blocks: true              # Sort text blocks by reading order
+  column_threshold: 0.3          # Threshold for detecting columns (0-1, fraction of page width)
+
+  # Header/footer detection
+  detect_headers_footers: true   # Detect repeating headers/footers
+  header_footer_margin: 0.1      # Top/bottom margin zone (fraction of page height)
+
   # Table detection
   table_settings:
     vertical_strategy: "lines"
@@ -30,8 +38,18 @@ markdown:
     - italic
     - lists
 
+  # Text cleaning options
+  text_cleaning:
+    normalize_unicode: true      # Expand ligatures (fi, fl, etc.) and normalize Unicode
+    normalize_whitespace: true   # Clean up excessive whitespace
+    dehyphenate: true            # Rejoin words split across lines with hyphens
+    normalize_quotes: true       # Convert smart quotes to straight quotes
+    render_tables: true          # Render extracted tables as markdown tables
+    remove_headers: true         # Remove detected repeating page headers
+    remove_footers: true         # Remove detected repeating page footers
+
 output:
-  chunk_size_kb: 500  # Split large files
+  chunk_size_kb: 500  # Split large files (breaks at paragraph boundaries)
   create_index: true
 
 logging:
