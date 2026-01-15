@@ -25,3 +25,13 @@ output/markdown/*
 
 # MacOS
 .DS_Store
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
