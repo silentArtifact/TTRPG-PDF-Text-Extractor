@@ -1,7 +1,6 @@
 extraction:
   # Text extraction settings
   min_text_length: 10
-  page_separator: "\n\n=== PAGE {} ===\n\n"
 
   # Reading order settings
   sort_blocks: true              # Sort text blocks by reading order
