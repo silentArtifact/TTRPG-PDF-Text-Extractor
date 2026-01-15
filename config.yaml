@@ -11,13 +11,9 @@ extraction:
     min_words_horizontal: 1
     min_words_vertical: 1
 
-  # RPG-specific patterns
-  stat_block_indicators:
-    - "HP:"
-    - "MP:"
-    - "Defense:"
-    - "M.Defense:"
-    - "Initiative:"
+  # Block indicator patterns - text blocks containing these strings
+  # will be flagged with has_indicator: true in the output
+  block_indicators: []
 
 markdown:
   # Header detection patterns

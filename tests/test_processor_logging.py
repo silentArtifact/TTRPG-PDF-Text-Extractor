@@ -3,7 +3,7 @@ from __future__ import annotations
 from io import StringIO
 
 from loguru import logger
-from fabula_extractor.processor import PDFProcessor
+from pdf_extractor.processor import PDFProcessor
 
 
 def test_invalid_pdf_logs_error(tmp_path):

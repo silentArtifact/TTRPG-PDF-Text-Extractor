@@ -1,11 +1,11 @@
-"""Tests for :mod:`fabula_extractor.extractor`."""
+"""Tests for :mod:`pdf_extractor.extractor`."""
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
-from fabula_extractor.extractor import FabulaExtractor
+from pdf_extractor.extractor import PDFExtractor
 
 
 def _root_config() -> Path:
@@ -20,7 +20,7 @@ def test_extract_pdf_and_cache(tmp_path, monkeypatch):
     pdf_path = tmp_path / "sample.pdf"
     pdf_path.write_bytes(fixture.read_bytes())
 
-    extractor = FabulaExtractor(str(_root_config()))
+    extractor = PDFExtractor(str(_root_config()))
 
     call_count = 0
 
@@ -73,7 +73,7 @@ def test_extract_all_creates_index(tmp_path, monkeypatch):
     for name in ("a.pdf", "b.pdf"):
         (pdf_dir / name).write_bytes(fixture.read_bytes())
 
-    extractor = FabulaExtractor(str(_root_config()))
+    extractor = PDFExtractor(str(_root_config()))
 
     def fake_process(_):
         return {"total_pages": 1, "text_blocks": 1, "tables": 0}

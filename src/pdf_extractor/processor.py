@@ -33,8 +33,8 @@ class PDFProcessor:
         extraction = self.config.get("extraction", {})
         self.min_text_length: int = extraction.get("min_text_length", 0)
         self.table_settings: Dict[str, Any] = extraction.get("table_settings", {})
-        self.stat_block_indicators: List[str] = extraction.get(
-            "stat_block_indicators", []
+        self.block_indicators: List[str] = extraction.get(
+            "block_indicators", []
         )
 
     # ------------------------------------------------------------------
@@ -78,9 +78,9 @@ class PDFProcessor:
                         text = block[4].strip()
                         if len(text) < self.min_text_length:
                             continue
-                        is_stat = any(ind in text for ind in self.stat_block_indicators)
+                        has_indicator = any(ind in text for ind in self.block_indicators)
                         page_info["text_blocks"].append(
-                            {"text": text, "stat_block": is_stat}
+                            {"text": text, "has_indicator": has_indicator}
                         )
 
                     result["text_blocks"] += len(page_info["text_blocks"])
