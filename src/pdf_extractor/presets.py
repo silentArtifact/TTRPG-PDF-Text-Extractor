@@ -8,6 +8,7 @@ use case.
 
 from __future__ import annotations
 
+import copy
 from typing import Any, Dict
 
 # Simple preset: Fast extraction with minimal processing
@@ -15,7 +16,6 @@ from typing import Any, Dict
 PRESET_SIMPLE: Dict[str, Any] = {
     "extraction": {
         "min_text_length": 10,
-        "page_separator": "\n\n---\n\n",
         "sort_blocks": False,
         "column_threshold": 0.3,
         "detect_headers_footers": False,
@@ -55,7 +55,6 @@ PRESET_SIMPLE: Dict[str, Any] = {
 PRESET_DETAILED: Dict[str, Any] = {
     "extraction": {
         "min_text_length": 10,
-        "page_separator": "\n\n=== PAGE {} ===\n\n",
         "sort_blocks": True,
         "column_threshold": 0.3,
         "detect_headers_footers": True,
@@ -103,7 +102,6 @@ PRESET_DETAILED: Dict[str, Any] = {
 PRESET_TABLES: Dict[str, Any] = {
     "extraction": {
         "min_text_length": 5,
-        "page_separator": "\n\n---\n\n",
         "sort_blocks": True,
         "column_threshold": 0.3,
         "detect_headers_footers": True,
@@ -178,7 +176,7 @@ def get_preset(name: str) -> Dict[str, Any]:
     if name_lower not in PRESETS:
         available = ", ".join(PRESETS.keys())
         raise ValueError(f"Unknown preset '{name}'. Available presets: {available}")
-    return PRESETS[name_lower].copy()
+    return copy.deepcopy(PRESETS[name_lower])
 
 
 def list_presets() -> Dict[str, str]:

@@ -270,5 +270,5 @@ def get_friendly_message(error: Exception, context: Optional[dict] = None) -> st
             f"  -> {str(error)[:200]}\n\n"
             "Hint: Check the log file (logs/extraction.log) for more details. "
             "If the problem persists, please report it at:\n"
-            "  https://github.com/anthropics/pdf-extractor/issues"
+            "  https://github.com/silentArtifact/TTRPG-PDF-Text-Extractor/issues"
         )
