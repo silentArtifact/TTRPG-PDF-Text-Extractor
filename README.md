@@ -26,8 +26,8 @@ python3 -m venv venv
 source venv/bin/activate      # macOS/Linux
 venv\Scripts\activate        # Windows
 
-# Install dependencies
-pip install -r requirements.txt
+# Install the package and dependencies
+pip install -e .
 
 # On Windows ensure PyMuPDF is installed:
 python -m pip install --upgrade pip
@@ -70,7 +70,7 @@ cp ~/Downloads/*.pdf input/pdfs/                    # macOS/Linux
 copy %USERPROFILE%\Downloads\*.pdf input\pdfs\      # Windows
 
 # Run extraction
-python -m pdf_extractor.extractor  # or use the console script: pdf-extractor
+python -m pdf_extractor  # or use the console script: pdf-extractor
 
 # Find results in output/markdown/
 ls output/markdown/
